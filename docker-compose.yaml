@@ -1,0 +1,42 @@
+version: "3.8"
+services:
+  app:
+    build: .
+    volumes:
+      - .:/app
+    ports:
+      - 8000:8000
+    image: app:shoe_django_project
+    container_name: shoe_django_container
+    command: python manage.py runserver 0.0.0.0:8000
+    depends_on:
+      - db
+  
+  db: 
+    image: postgres
+    #always restarts the container- Docker daemon on restarts or 
+    #the container itself is manually restarted.
+    restart: always
+    volumes:
+      - ./data/postgres_db:/var/lib/postgresql/data
+    environment:
+      - POSTGRES_DB=test_db
+      - POSTGRES_USER=root
+      - POSTGRES_PASSWORD=root
+    
+    container_name: postgres_db
+    ports:
+      - "5432:5432"
+
+  pgadmin:
+    container_name: pgadmin4
+    image: dpage/pgadmin4
+    restart: always
+    environment:
+      - PGADMIN_DEFAULT_EMAIL=shoe_admin@app.com
+      - PGADMIN_DEFAULT_PASSWORD=project2_work
+
+    ports:
+      - "5050:80"
+
+
