@@ -26,20 +26,22 @@ class CreateOrderListView(generics.GenericAPIView):
     queryset = Order.objects.all()
     permission_classes = [IsAuthenticatedOrReadOnly]
     
-    @swagger_auto_schema(operation_summary="List all orders made")
+    @swagger_auto_schema(operation_summary="List all orders made", 
+    operation_description="Listing the orders made by this account")
     def get(self, request):
         orders = Order.objects.all()
         serializer = self.serializer_class(instance= orders, many = True)
 
         return Response(data = serializer.data, status = status.HTTP_200_OK)
         
-    @swagger_auto_schema(operation_summary="Create a new order")
+    @swagger_auto_schema(operation_summary="Create a new order", 
+    operation_description="The parameters for new order. Sizes: Small, Medium and Large. Shoe Types: flats, boots, trainers and sandals ")
     def post(self, request):
 
         #Get the data from the request to validate it
         data = request.data
 
-        serializer = self.serializer_class(data = data)
+        serializer = self.serializer_class(data=data)
         
         # B. Get the user and save the data with users
         user = request.user
@@ -116,6 +118,7 @@ class UpdateOrderStatusView(generics.GenericAPIView):
 class UserOrdersView(generics.GenericAPIView):
     #use the same serializer, as it as all the relevant parameters
     serializer_class = OrderDetailSerializer
+    permission_classes = [IsAuthenticated]
     
     @swagger_auto_schema(operation_summary="View a specific User's Orders")
     def get(self,request, user_id):
@@ -129,6 +132,7 @@ class UserOrdersView(generics.GenericAPIView):
 
 class UserOrderDetailView(generics.GenericAPIView):
     serializer_class = OrderDetailSerializer
+    permission_classes = [IsAuthenticated]
     
     @swagger_auto_schema(operation_summary="View a specific Order from a specific User")
     def get(self, request, user_id, order_id):

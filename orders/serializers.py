@@ -9,7 +9,7 @@ class CreateOrderSerializer(serializers.ModelSerializer):
     quantity = serializers.IntegerField()
 
     #This will be an hiddenfield that can only by superuser, admin or staff
-    order_status = serializers.HiddenField(default='PENDING')
+    order_status = serializers.HiddenField(default='pending')
     
   
     class Meta:
@@ -22,7 +22,7 @@ class OrderDetailSerializer(serializers.ModelSerializer):
     shoe_size = serializers.CharField(max_length=50)
     shoe_type = serializers.CharField(max_length=50)
     quantity = serializers.IntegerField()
-    order_status = serializers.CharField(default='PENDING')
+    order_status = serializers.CharField(default='pending')
     created_at = serializers.DateTimeField()
     update_at = serializers.DateTimeField()
     
@@ -33,7 +33,7 @@ class OrderDetailSerializer(serializers.ModelSerializer):
 
 
 class OrderStatusUpdateSerializer(serializers.ModelSerializer):
-    order_status = serializers.CharField(default='PENDING')
+    order_status = serializers.CharField(default='pending')
 
     class Meta:
         model = Order

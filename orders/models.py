@@ -10,26 +10,23 @@ class Order(models.Model):
     
     """
     SHOE_SIZES =(
-        ('first_small', '3' ),
-        ('second_small', '4' ),
-        ('first_medium', '5' ),
-        ('second_medium', '6' ),
-        ('first_large', '7' ),
-        ('second_large','8' ),
+        ('small', 'SMALL' ),
+        ('medium', 'MEDIUM' ),
+        ('large', 'LARGE' ),
     )
 
     SHOE_TYPES =(
-        ('FLATS', 'flat'),
-        ('BOOTS', 'boot'),
-        ('TRAINERS', 'trainers'),
-        ('SANDLES', 'sandals'),
+        ('flats', 'FLATS'),
+        ('boots', 'BOOTS'),
+        ('trainers', 'TRAINERS'),
+        ('sandals', 'SANDLES'),
 
     )
 
     ORDER_STATUS=(
-        ('PENDING', 'pending'),
-        ('IN_TRANSIT', 'in_transit'),
-        ('DELIVERED', 'delivered')
+        ('pending', 'PENDING'),
+        ('in_transit', 'IN_TRANSIT'),
+        ('delivered', 'DELIVERED')
     )
    
     customer = models.ForeignKey(User, on_delete= models.CASCADE)

@@ -13,7 +13,7 @@ services:
       - db
   
   db: 
-    image: postgres
+    image: postgres:13
     #always restarts the container- Docker daemon on restarts or 
     #the container itself is manually restarted.
     restart: always

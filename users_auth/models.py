@@ -55,13 +55,14 @@ class ShoeUser(AbstractUser):
 
     #use django phonenumber module fields, to check if valid
     #pip install django-phonenumber-field[phonenumbers]
-    phone_number = PhoneNumberField(null =False,unique= True)
+    # phone_number = PhoneNumberField(null =False,unique= True)
     date_joined = models.DateTimeField(_('Date'), auto_now_add=True)
     
     #here to use email to log-into the system 
     USERNAME_FIELD = 'email'
     
-    REQUIRED_FIELDS = ['username','phone_number']
+    # REQUIRED_FIELDS = ['username','phone_number']
+    REQUIRED_FIELDS = ['username']
 
     #Specify how user object are created
     # objects =ShoeUserManager()

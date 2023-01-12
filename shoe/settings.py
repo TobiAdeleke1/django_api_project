@@ -42,14 +42,15 @@ INSTALLED_APPS = [
 
 SWAGGER_SETTINGS = {
    'SECURITY_DEFINITIONS': {
-    
       'Bearer': {
             'type': 'apiKey',
             'name': 'Authorization',
             'in': 'header'
       }
+    
    }
 }
+# 'USE_SESSION_AUTH': False,
 
 
 AUTH_USER_MODEL ='users_auth.ShoeUser'
@@ -66,6 +67,7 @@ REST_FRAMEWORK= {
 #change JWT to Bearer
 SIMPLE_JWT = {
    'AUTH_HEADER_TYPES': ('Bearer',),
+   'AUTH_HEADER_NAME': 'HTTP_AUTHORIZATION',
    'ACCESS_TOKEN_LIFETIME':timedelta(days=1),
    'REFRESH_TOKEN_LIFETIME': timedelta(days=1),
    'BLACKLIST_AFTER_ROTATION': False,
@@ -116,7 +118,7 @@ WSGI_APPLICATION = 'shoe.wsgi.application'
     ## Changing database from SQLITE --> POSTGRESQL
 DATABASES = {
     "default": {
-        "ENGINE": "django.db.backends.postgresql_psycopg2",
+        "ENGINE": "django.db.backends.postgresql",
         "NAME": "test_db",
         "USER": "root",
         "PASSWORD": "root",

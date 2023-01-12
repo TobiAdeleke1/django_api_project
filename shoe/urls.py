@@ -1,4 +1,3 @@
-
 from django.contrib import admin
 from django.urls import path, include,re_path
 from rest_framework import permissions
@@ -21,16 +20,19 @@ schema_view = get_schema_view(
 
 
 urlpatterns = [
-    path('', views.HelloOrderView.as_view(), name= 'index'),
+    # path('accounts/login/', views.HelloOrderView.as_view(), name= 'index'),
+    path('accounts/login/', admin.site.urls, name= 'django_admin'),
+    path('', schema_view.with_ui('swagger', cache_timeout=0), name='schema-swagger-ui'),
     path('admin/', admin.site.urls, name='django_admin'),
-    path('auth/', include('users_auth.urls')),
-
+   
     path('orders/', include('orders.urls')),
     path('auth/', include('djoser.urls.jwt')),
+    path('auth/', include('users_auth.urls')),
+    
+    re_path(r'^swagger(?P<format>\.json|\.yaml)$', schema_view.without_ui(cache_timeout=0), name='schema-json'),
+    re_path(r'^redoc/$', schema_view.with_ui('redoc', cache_timeout=0), name='schema-redoc'),
     # path('swagger<format>.json|.yaml)$', schema_view.without_ui(cache_timeout=0), name='schema-json'),
     # path('docs/', schema_view.with_ui('swagger', cache_timeout=0), name='schema-swagger-ui'),
     # path('redoc/', schema_view.with_ui('redoc', cache_timeout=0), name='schema-redoc'),
-    re_path(r'^swagger(?P<format>\.json|\.yaml)$', schema_view.without_ui(cache_timeout=0), name='schema-json'),
-    re_path(r'^docs/$', schema_view.with_ui('swagger', cache_timeout=0), name='schema-swagger-ui'),
-    re_path(r'^redoc/$', schema_view.with_ui('redoc', cache_timeout=0), name='schema-redoc'),
+    # re_path(r'^docs/$', schema_view.with_ui('swagger', cache_timeout=0), name='schema-swagger-ui'),
 ]
