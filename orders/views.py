@@ -8,16 +8,10 @@ from drf_yasg.utils import swagger_auto_schema
 from orders.serializers import *
 from orders.models import *
 from django.contrib.auth import get_user_model
-from django.views.generic import TemplateView,CreateView
-from django.urls import reverse_lazy
 
 
 # Create your views here.
 User= get_user_model()
-
-# Create your views here.
-class HelloOrderView(TemplateView):
-    template_name = 'orders/index.html'
 
 class CreateOrderListView(generics.GenericAPIView):
     

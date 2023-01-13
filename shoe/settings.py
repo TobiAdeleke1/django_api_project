@@ -41,6 +41,7 @@ INSTALLED_APPS = [
 ]
 
 SWAGGER_SETTINGS = {
+   'USE_SESSION_AUTH': False,
    'SECURITY_DEFINITIONS': {
       'Bearer': {
             'type': 'apiKey',
@@ -50,7 +51,7 @@ SWAGGER_SETTINGS = {
     
    }
 }
-# 'USE_SESSION_AUTH': False,
+
 
 
 AUTH_USER_MODEL ='users_auth.ShoeUser'
@@ -107,22 +108,13 @@ WSGI_APPLICATION = 'shoe.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
 
-# if DEBUG:
-#     DATABASES = {
-#         'default': {
-#             'ENGINE': 'django.db.backends.sqlite3',
-#             'NAME': BASE_DIR / 'db.sqlite3',
-#         }
-#     }
-# else:
-    ## Changing database from SQLITE --> POSTGRESQL
 DATABASES = {
     "default": {
         "ENGINE": "django.db.backends.postgresql",
-        "NAME": "test_db",
-        "USER": "root",
-        "PASSWORD": "root",
-        "HOST": "db",  # set in docker-compose.yml
+        "NAME": config('DB_NAME'),
+        "USER": config('DB_USER'),
+        "PASSWORD": config('DB_PASSWORD'),
+        "HOST": config('DB_HOST'),  # set in docker-compose.yml
         "PORT": 5432,  # default postgres port
     }
 }

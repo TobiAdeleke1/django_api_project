@@ -2,7 +2,6 @@ from django.db import models
 from django.contrib.auth.models import AbstractUser
 from django.contrib.auth.base_user import BaseUserManager
 from django.utils.translation import gettext_lazy as _
-from phonenumber_field.modelfields import PhoneNumberField
 
 
 # Create your models here.
@@ -52,10 +51,6 @@ class ShoeUser(AbstractUser):
     
     username = models.CharField(_('Username'),max_length=30, unique= True)
     email = models.EmailField(_('Email'),max_length=100, unique=True)
-
-    #use django phonenumber module fields, to check if valid
-    #pip install django-phonenumber-field[phonenumbers]
-    # phone_number = PhoneNumberField(null =False,unique= True)
     date_joined = models.DateTimeField(_('Date'), auto_now_add=True)
     
     #here to use email to log-into the system 
